@@ -1,0 +1,101 @@
+  .signup-bg {
+  background: linear-gradient(120deg, #f4f5f7 60%, #e9f2ff 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.signup-bg::before,
+.signup-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(32px);
+  opacity: 0.45;
+  animation: floatBlob 18s infinite alternate;
+  z-index: 0;
+}
+.signup-bg::before {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 30%, #0052cc 0%, #36d1c4 100%);
+  top: -120px;
+  left: -160px;
+  animation-delay: 0s;
+}
+.signup-bg::after {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at 70% 70%, #36d1c4 0%, #b3d4fc 100%);
+  bottom: -100px;
+  right: -120px;
+  animation-delay: 5s;
+}
+@keyframes floatBlob {
+  0% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1.08) translateY(30px); }
+}
+.signup-card {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 1.2rem;
+  border: none;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+.signup-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #0052cc;
+  background: #e9f2ff;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 12px rgba(0,82,204,0.07);
+}
+.card-title {
+  color: #0052cc;
+  font-weight: 600;
+}
+.btn-primary {
+  background-color: #0052cc;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.18s;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0747a6;
+}
+.form-label {
+  font-weight: 500;
+  color: #344563;
+}
+.form-control, .form-select {
+  border-radius: 0.5rem;
+  border-color: #e0e0e0;
+  background: #f9fafc;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #0052cc;
+  box-shadow: 0 0 0 0.1rem #e9f2ff;
+}
+.link-primary {
+  color: #0052cc;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.link-primary:hover {
+  color: #0747a6;
+  text-decoration: underline;
+}
+@media (max-width: 600px) {
+  .signup-card {
+    max-width: 98vw;
+    padding: 1.5rem 0.5rem;
+  }
+}
+

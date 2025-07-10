@@ -1,0 +1,87 @@
+body {
+      background: #f4f5f7;
+      min-height: 100vh;
+    }
+    .sidebar {
+      height: 100vh;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      padding-top: 1rem;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 220px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar .nav-link {
+      color: #172b4d;
+      font-weight: 500;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      transition: background 0.2s;
+    }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background: #e9f2ff;
+      color: #0052cc;
+    }
+    .sidebar .collapse .nav-link {
+      font-size: 0.97rem;
+      margin-left: 0.5rem;
+      color: #344563;
+      font-weight: 400;
+    }
+    .sidebar .collapse .nav-link:hover {
+      background: #e9f2ff;
+      color: #0052cc;
+    }
+    .main-content {
+      margin-left: 220px;
+      padding: 2rem;
+    }
+    .navbar {
+      margin-left: 220px;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      z-index: 101;
+    }
+    .navbar .navbar-brand {
+      font-weight: bold;
+      color: #0052cc;
+      letter-spacing: 1px;
+    }
+    .navbar .icon-btn {
+      background: none;
+      border: none;
+      position: relative;
+      margin-left: 1rem;
+      color: #344563;
+      font-size: 1.3rem;
+    }
+    .navbar .icon-btn .badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ff5630;
+      color: #fff;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      padding: 2px 5px;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 60px;
+        padding-top: 0.5rem;
+      }
+      .sidebar .nav-link span {
+        display: none;
+      }
+      .sidebar .collapse .nav-link {
+        margin-left: 0;
+      }
+      .main-content, .navbar {
+        margin-left: 60px;
+      }
+    }

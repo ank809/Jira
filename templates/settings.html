@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings | Jira-Style Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --main-bg: #f4f5f7;
+      --main-text: #172b4d;
+      --sidebar-bg: #fff;
+      --card-bg: #fff;
+      --border: #e0e0e0;
+    }
+    body.dark-mode {
+      --main-bg: #1a1c20;
+      --main-text: #f4f5f7;
+      --sidebar-bg: #23262b;
+      --card-bg: #23262b;
+      --border: #31343a;
+    }
+    body {
+      background: var(--main-bg);
+      color: var(--main-text);
+      min-height: 100vh;
+    }
+    .sidebar {
+      height: 100vh;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      padding-top: 0rem;
+      padding-left: 0;
+      position: fixed;
+      left: 0; top: 0; width: 220px; z-index: 100;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .sidebar .nav-link {
+      color: var(--main-text); font-weight: 500; border-radius: 6px; margin-bottom: 4px; transition: background 0.2s;
+    }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover {
+      background: #e9f2ff; color: #0052cc;
+    }
+    .main-content { margin-left: 220px; padding: 2.5rem 2rem 2rem 2rem; }
+    .settings-card {
+      background: var(--card-bg); border-radius: 1rem; box-shadow: 0 2px 12px rgba(0,82,204,0.07);
+      padding: 2rem; max-width: 700px; margin: 0 auto;
+      color: var(--main-text);
+    }
+    .settings-tabs .nav-link {
+      color: #344563; font-weight: 500;
+    }
+    .settings-tabs .nav-link.active {
+      color: #0052cc; border-bottom: 2.5px solid #0052cc; background: #e9f2ff;
+    }
+    .settings-section label {
+      font-weight: 500; color: #344563;
+    }
+    .settings-section input, .settings-section select {
+      border-radius: 0.5rem; border-color: #e0e0e0; background: #f9fafc;
+      color: var(--main-text);
+    }
+    .settings-section input:focus, .settings-section select:focus {
+      border-color: #0052cc; box-shadow: 0 0 0 0.1rem #e9f2ff;
+    }
+    .settings-section .form-check-input:checked {
+      background-color: #0052cc; border-color: #0052cc;
+    }
+    .settings-section .form-check-label {
+      margin-left: 0.5rem;
+    }
+    .settings-save-btn {
+      background: #0052cc; color: #fff; font-weight: 600; border-radius: 0.5rem;
+    }
+    .settings-save-btn:hover { background: #0747a6; color: #fff; }
+    @media (max-width: 900px) {
+      .main-content { margin-left: 60px; padding: 1.2rem; }
+      .sidebar { width: 60px; }
+      .sidebar .nav-link span { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <!-- <div class="sidebar d-flex flex-column">
+    <div>
+     <div class="d-flex align-items-center justify-content-start py-1 mb-3" style="gap: 1px;">
+        <img src="../static /icons/jira-logo.png" alt="Jira Logo" width="50" height="50" style="padding: 0%;">
+        <span style="font-size: 1.3rem; font-weight: 600; color: hsl(216, 100%, 40%); letter-spacing: 1px;">Jira</span>
+      </div>
+      <nav class="nav flex-column w-100">
+        <a class="nav-link" href="dashboard.html"><i class="bi bi-house-door me-2"></i><span>Home</span></a>
+        <a class="nav-link" href="#"><i class="bi bi-kanban me-2"></i><span>Projects</span></a>
+        <a class="nav-link" href="#"><i class="bi bi-lightning-charge me-2"></i><span>Sprint</span></a>
+        <a class="nav-link" href="profile.html"><i class="bi bi-person-circle me-2"></i><span>Profile</span></a>
+        <a class="nav-link active" href="settings.html"><i class="bi bi-gear me-2"></i><span>Settings</span></a>
+      </nav>
+    </div>
+    <div class="mb-3 w-100"></div>
+  </div> -->
+<div class="sidebar d-flex flex-column">
+  <div>
+    <!-- Jira Icon at the top -->
+  <div class="jira_logo">
+    <img src="../static /icons/jira-logo.png"  alt="Jira Logo " width="50" height="50" >
+    <a style="color:#0052cc">Jira </a>
+  </div>
+   
+
+    <nav class="nav flex-column w-100">
+      <a class="nav-link" href="dashboard.html"><i class="bi bi-house-door me-2"></i><span>Home</span></a>
+      <!-- Projects Dropdown -->
+     <!-- Projects Main Dropdown -->
+<a class="nav-link d-flex justify-content-between align-items-center"
+   data-bs-toggle="collapse" href="#projectsDropdown" role="button"
+   aria-expanded="false" aria-controls="projectsDropdown">
+  <span><i class="bi bi-kanban me-2"></i>Projects</span>
+  <i class="bi bi-chevron-down small"></i>
+</a>
+<div class="collapse ps-4" id="projectsDropdown">
+  <!-- My Project Sub-dropdown -->
+  <a class="nav-link d-flex justify-content-between align-items-center"
+     data-bs-toggle="collapse" href="#myProjectDropdown" role="button"
+     aria-expanded="false" aria-controls="myProjectDropdown">
+    <span><i class="bi bi-folder me-2"></i>My Project</span>
+    <i class="bi bi-chevron-down small"></i>
+  </a>
+  <div class="collapse ps-4" id="myProjectDropdown">
+    <a class="nav-link" href="#"><i class="bi bi-list-ul me-2"></i>All Projects</a>
+    <a class="nav-link" href="#"><i class="bi bi-plus-circle me-2"></i>New Project</a>
+  </div>
+  <!-- My Task Sub-dropdown -->
+  <a class="nav-link d-flex justify-content-between align-items-center"
+     data-bs-toggle="collapse" href="#myTaskDropdown" role="button"
+     aria-expanded="false" aria-controls="myTaskDropdown">
+    <span><i class="bi bi-check2-square me-2"></i>My Task</span>
+    <i class="bi bi-chevron-down small"></i>
+  </a>
+  <div class="collapse ps-4" id="myTaskDropdown">
+    <a class="nav-link" href="#"><i class="bi bi-plus-circle me-2"></i>Create Task</a>
+    <a class="nav-link" href="#"><i class="bi bi-list-task me-2"></i>All Tasks</a>
+  </div>
+</div>
+
+      <a class="nav-link" href="#"><i class="bi bi-lightning-charge me-2"></i><span>Sprint</span></a>
+      <a class="nav-link" href="profile.html"><i class="bi bi-person-circle me-2"></i><span>Profile</span></a>
+    </nav>
+  </div>
+
+  <!-- Settings at the bottom -->
+  <div class="mb-3 w-100">
+    <a class="nav-link d-flex align-items-center" href="settings.html">
+      <i class="bi bi-gear me-2"></i><span>Settings</span>
+    </a>
+  </div>
+</div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="settings-card">
+      <h3 class="mb-4"><i class="bi bi-gear"></i> Settings</h3>
+      <!-- Tabs -->
+      <ul class="nav nav-tabs settings-tabs mb-4" id="settingsTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="prefs-tab" data-bs-toggle="tab" data-bs-target="#prefs" type="button" role="tab">Preferences</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="notif-tab" data-bs-toggle="tab" data-bs-target="#notif" type="button" role="tab">Notifications</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">Security</button>
+        </li>
+      </ul>
+      <div class="tab-content settings-section" id="settingsTabContent">
+        <!-- Profile Tab -->
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
+          <form>
+            <div class="mb-3">
+              <label for="username" class="form-label">Name</label>
+              <input type="text" class="form-control" id="username" value="Jane Doe">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" value="jane@example.com">
+            </div>
+            <button type="submit" class="btn settings-save-btn mt-2">Save Profile</button>
+          </form>
+        </div>
+        <!-- Preferences Tab -->
+        <div class="tab-pane fade" id="prefs" role="tabpanel">
+          <form>
+            <div class="mb-3">
+              <label for="theme" class="form-label">Theme</label>
+              <select id="theme" class="form-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="system" selected>System</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Language</label>
+              <select class="form-select">
+                <option selected>English</option>
+                <option>Hindi</option>
+                <option>French</option>
+                <option>German</option>
+              </select>
+            </div>
+            <button type="submit" class="btn settings-save-btn mt-2">Save Preferences</button>
+          </form>
+        </div>
+        <!-- Notifications Tab -->
+        <div class="tab-pane fade" id="notif" role="tabpanel">
+          <form>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+              <label class="form-check-label" for="emailNotif">Email notifications</label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="smsNotif">
+              <label class="form-check-label" for="smsNotif">SMS notifications</label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="pushNotif" checked>
+              <label class="form-check-label" for="pushNotif">Push notifications</label>
+            </div>
+            <button type="submit" class="btn settings-save-btn mt-2">Save Notifications</button>
+          </form>
+        </div>
+        <!-- Security Tab -->
+        <div class="tab-pane fade" id="security" role="tabpanel">
+          <form>
+            <div class="mb-3">
+              <label for="currentPass" class="form-label">Current Password</label>
+              <input type="password" class="form-control" id="currentPass">
+            </div>
+            <div class="mb-3">
+              <label for="newPass" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="newPass">
+            </div>
+            <div class="mb-3">
+              <label for="confirmPass" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" id="confirmPass">
+            </div>
+            <button type="submit" class="btn settings-save-btn mt-2">Change Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Theme Switcher JS -->
+  <script>
+    function setTheme(theme) {
+      if (theme === 'system') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.body.classList.toggle('dark-mode', prefersDark);
+      } else {
+        document.body.classList.toggle('dark-mode', theme === 'dark');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeSelect = document.getElementById('theme');
+      let savedTheme = localStorage.getItem('theme') || 'system';
+      themeSelect.value = savedTheme;
+      setTheme(savedTheme);
+
+      themeSelect.addEventListener('change', function() {
+        const selected = this.value;
+        localStorage.setItem('theme', selected);
+        setTheme(selected);
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (themeSelect.value === 'system') setTheme('system');
+      });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
