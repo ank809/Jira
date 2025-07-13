@@ -3,11 +3,12 @@ from flask_migrate import Migrate
 from config import Config
 from extensions import db  
 from routes.auth_routes import auth_bp
+from routes.teams_route import team_bp
 from routes.profile_route import profile_bp
 from routes.dashboard_route import dash_bp
 from flask_login import LoginManager
 from models.user import User
-
+from routes.project_routes import project_bp
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)  
@@ -28,6 +29,11 @@ def unauthorized_error(error):
 app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(dash_bp, url_prefix='/')
 app.register_blueprint(profile_bp, url_prefix='/')
-
+app.register_blueprint(project_bp, url_prefix='/projects')
+app.register_blueprint(team_bp, url_prefix='/teams')
+from models.project import Project
+from models.sprint import Sprint
+from models.tasks import Task
+from models.team import Team
 if __name__ == "__main__":
     app.run(debug=True)
